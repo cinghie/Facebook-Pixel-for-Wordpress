@@ -2,7 +2,7 @@
     "name": "cinghie/facebook-pixel-for-wordpress",
     "description": "Facebook Pixel plugins for wordpress",
     "type": "project",
-    "license": "GPL",
+    "license": "GPL-3.0-or-later",
     "require": {},
     "require-dev": {},
     "autoload": {

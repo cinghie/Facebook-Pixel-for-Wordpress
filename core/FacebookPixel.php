@@ -98,7 +98,8 @@ src=\"https://www.facebook.com/tr?id=%s&ev=%s%s&noscript=1\" />
   /**
    * Gets FB pixel init code
    */
-  public static function getPixelInitCode($agent_string, $param = array(), $with_script_tag = true) {
+  public static function getPixelInitCode($agent_string, $param = array(), $with_script_tag = true)
+  {
     if (empty(self::$pixelId)) {
       return;
     }
@@ -107,16 +108,25 @@ src=\"https://www.facebook.com/tr?id=%s&ev=%s%s&noscript=1\" />
     ? "<script type='text/javascript'>" . self::$pixelFbqCodeWithoutScript . "</script>"
     : self::$pixelFbqCodeWithoutScript;
     $param_str = $param;
+
     if (is_array($param)) {
       $param_str = json_encode($param, JSON_PRETTY_PRINT);
     }
-    $agent_param = array('agent' => $agent_string);
-    return sprintf(
-      $code,
-      'init',
-      self::$pixelId,
-      ', ' . $param_str,
-      ', ' . json_encode($agent_param, JSON_PRETTY_PRINT));
+
+    if($agent_string)
+    {
+      $agent_param = array('agent' => $agent_string);
+
+      return sprintf(
+		$code,
+		'init',
+		self::$pixelId,
+		', ' . $param_str,
+		', ' . json_encode($agent_param, JSON_PRETTY_PRINT)
+      );
+    }
+
+    return sprintf($code, 'init', self::$pixelId, null, null);
   }
 
   /**
